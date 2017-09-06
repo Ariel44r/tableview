@@ -18,6 +18,7 @@
 		4F3625AB1F5E86860087C339 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F3625A91F5E86860087C339 /* LaunchScreen.storyboard */; };
 		4F3625B61F5E86860087C339 /* tableview_cellsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3625B51F5E86860087C339 /* tableview_cellsTests.swift */; };
 		4F3625C11F5E86860087C339 /* tableview_cellsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3625C01F5E86860087C339 /* tableview_cellsUITests.swift */; };
+		4F4D1F011F60A7A2004EE472 /* trash.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4F4D1F001F60A7A2004EE472 /* trash.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		4F3625BC1F5E86860087C339 /* tableview_cellsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = tableview_cellsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F3625C01F5E86860087C339 /* tableview_cellsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tableview_cellsUITests.swift; sourceTree = "<group>"; };
 		4F3625C21F5E86860087C339 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4F4D1F001F60A7A2004EE472 /* trash.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = trash.jpg; path = ../../../Downloads/trash.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 				4F3625A71F5E86860087C339 /* Assets.xcassets */,
 				4F3546BC1F5F63C800F250A4 /* Ernesto.jpg */,
 				4F3546BD1F5F63C800F250A4 /* Gabriel.jpg */,
+				4F4D1F001F60A7A2004EE472 /* trash.jpg */,
 				4F3546BE1F5F63C800F250A4 /* Karla.jpg */,
 				4F3625A91F5E86860087C339 /* LaunchScreen.storyboard */,
 				4F3625AC1F5E86860087C339 /* Info.plist */,
@@ -248,6 +251,7 @@
 				4F3546C01F5F63C800F250A4 /* Gabriel.jpg in Resources */,
 				4F3625A81F5E86860087C339 /* Assets.xcassets in Resources */,
 				4F3546BF1F5F63C800F250A4 /* Ernesto.jpg in Resources */,
+				4F4D1F011F60A7A2004EE472 /* trash.jpg in Resources */,
 				4F3625A61F5E86860087C339 /* Main.storyboard in Resources */,
 				4F3546C11F5F63C800F250A4 /* Karla.jpg in Resources */,
 			);

@@ -22,7 +22,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="169" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="l8e-bD-VKw">
+                            <tableView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="169" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="l8e-bD-VKw">
                                 <rect key="frame" x="16" y="65" width="343" height="573"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
@@ -40,22 +40,25 @@
                                                         <constraint firstAttribute="height" constant="128" id="yN5-y7-a84"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Thy-Ne-ekr">
-                                                    <rect key="frame" x="187" y="74" width="111" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="21" id="eWO-LG-g2i"/>
-                                                        <constraint firstAttribute="width" constant="111" id="v42-RF-GRu"/>
-                                                    </constraints>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Thy-Ne-ekr">
+                                                    <rect key="frame" x="167" y="44" width="111" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EB2-0P-OaJ">
+                                                    <rect key="frame" x="201" y="87" width="39" height="42"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" backgroundImage="trash.jpg"/>
+                                                    <connections>
+                                                        <action selector="button_borrar:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EDe-lM-cQ7"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Thy-Ne-ekr" firstAttribute="centerX" secondItem="3e0-3f-H9K" secondAttribute="centerX" constant="71" id="B0x-xA-ghO"/>
                                                 <constraint firstItem="a3J-mA-lWe" firstAttribute="top" secondItem="3e0-3f-H9K" secondAttribute="topMargin" constant="12" id="Hxw-Ji-tKh"/>
                                                 <constraint firstItem="a3J-mA-lWe" firstAttribute="leading" secondItem="3e0-3f-H9K" secondAttribute="leadingMargin" id="LO0-11-Tfn"/>
-                                                <constraint firstItem="Thy-Ne-ekr" firstAttribute="centerY" secondItem="3e0-3f-H9K" secondAttribute="centerY" id="RUL-9a-HzX"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="a3J-mA-lWe" secondAttribute="bottom" constant="12.5" id="ert-RU-jmO"/>
                                                 <constraint firstItem="a3J-mA-lWe" firstAttribute="centerY" secondItem="3e0-3f-H9K" secondAttribute="centerY" id="hsa-7V-pUI"/>
                                                 <constraint firstItem="a3J-mA-lWe" firstAttribute="centerX" secondItem="3e0-3f-H9K" secondAttribute="centerX" constant="-111.5" id="lJW-C6-dTp"/>
@@ -84,7 +87,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="121" y="-482"/>
+            <point key="canvasLocation" x="120.8" y="-482.60869565217394"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="trash.jpg" width="1300" height="1300"/>
+    </resources>
 </document>
