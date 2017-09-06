@@ -9,8 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
-    
+
     let list = ["Ernesto","Gabriel","Karla"]
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
