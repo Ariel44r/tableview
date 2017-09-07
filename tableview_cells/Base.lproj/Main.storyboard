@@ -52,7 +52,7 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" backgroundImage="trash.jpg"/>
                                                     <connections>
-                                                        <action selector="button_borrar:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EDe-lM-cQ7"/>
+                                                        <action selector="callbuttonpressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="A5S-Ng-HLX"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -65,6 +65,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="myButton" destination="EB2-0P-OaJ" id="5Oj-QJ-NXa"/>
                                             <outlet property="myImage" destination="a3J-mA-lWe" id="JlQ-gs-G0o"/>
                                             <outlet property="myLabel" destination="Thy-Ne-ekr" id="yhb-dJ-LPI"/>
                                         </connections>

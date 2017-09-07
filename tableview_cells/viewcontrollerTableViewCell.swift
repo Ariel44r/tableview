@@ -12,6 +12,7 @@ class viewcontrollerTableViewCell: UITableViewCell {
     
     @IBOutlet weak var myImage: UIImageView!
     @IBOutlet weak var myLabel: UILabel!   
+    @IBOutlet weak var myButton: UIButton!
     
     
     

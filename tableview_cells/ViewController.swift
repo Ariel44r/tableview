@@ -17,13 +17,30 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return (list.count)
     }
     
+    //Action_Button
+    @IBAction func callbuttonpressed(_ sender: UIButton) {
+        print("button_pressed_\(sender.tag)")
+        list.remove(at: sender.tag)
+    }
+   
+    
     //custom_cell
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! viewcontrollerTableViewCell
         cell.myImage.image = UIImage(named:(list[indexPath.row] + ".jpg"))
         cell.myLabel.text = list[indexPath.row]
+        cell.myButton.tag = indexPath.row
+        print(indexPath.row)
+        cell.myButton.addTarget(self, action: #selector(ViewController.callbuttonpressed(_:)), for: UIControlEvents.touchUpInside)
+        //tableView.reloadData()
+
         return (cell)
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        list.remove(at: indexPath.row)
+    }
+    
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool
     {
@@ -40,11 +57,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
-    @IBAction func button_borrar(_ sender: Any) {
-        
-        displayalert(userMessage: "Seguro que desea borrar el elemento de la lista?")
-        
-    }
     
     
     //display_alert_function
@@ -52,8 +64,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let myalert = UIAlertController(title:"Aviso", message:userMessage, preferredStyle: UIAlertControllerStyle.alert)
         let okAction = UIAlertAction(title:"ok", style: UIAlertActionStyle.default, handler:nil)
         myalert.addAction(okAction)
-        let declineaction = UIAlertAction(title:"decline", style: UIAlertActionStyle.default, handler:nil)
-        myalert.addAction(declineaction)
+        let cancelaction = UIAlertAction(title:"cancel", style: UIAlertActionStyle.default, handler:nil)
+        myalert.addAction(cancelaction)
         self.present(myalert, animated:true, completion:nil)
     }
 
