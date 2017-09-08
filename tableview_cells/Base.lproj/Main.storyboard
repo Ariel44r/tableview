@@ -85,6 +85,9 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="l8e-bD-VKw" secondAttribute="bottom" constant="29" id="raA-Wa-hkr"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableMascota" destination="l8e-bD-VKw" id="21Q-7M-k5p"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
