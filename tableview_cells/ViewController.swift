@@ -14,10 +14,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     @IBOutlet weak var tableMascota: UITableView!
     
+    @IBAction func buttonAddDog(_ sender: Any) {
+       displayFieldTextAlert()
+    }
+    
     //Action_Button
     @IBAction func callbuttonpressed(_ sender: UIButton) {
         print("button_pressed_\(sender.tag)")
         displayalert(userMessage: "Realmente desea eliminar este elemento?", index: sender.tag)
+        
     }
     
     //return_number_cells
@@ -84,6 +89,32 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
 
+    
+    func displayFieldTextAlert () {
+        //Create the alert controller.
+        let alert = UIAlertController(title: "Ingresa el nombre del Perro", message: "Enter a text", preferredStyle: .alert)
+        
+        //Add the text field. You can configure it however you need.
+        alert.addTextField { (textField) in
+            textField.text = ""
+        }
+        
+        //Grab the value from the text field, and print it when the user clicks OK.
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+            let textField = alert?.textFields![0] // Force unwrapping because we know it exists.
+            print("Text field: \(String(describing: textField?.text))")
+            self.addIndex(name: String(describing: textField))
+        }))
+        
+        //Present the alert.
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func addIndex(name: String) {
+        list.append(name)
+        tableMascota.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
