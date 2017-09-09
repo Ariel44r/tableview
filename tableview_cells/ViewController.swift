@@ -18,19 +18,37 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
        displayFieldTextAlert()
     }
     
-    //Action_Button
+    class Perro {
+        var list:[Perro] = [Perro]()
+        var name: String
+        var photo: UIImage
+        init (name: String, photo: UIImage) {
+            self.name = name
+            self.photo = photo
+        }
+        func returnImage () -> UIImage {
+            return self.photo
+        }
+        func returnName () -> String {
+            return self.name
+        }
+    }
+    
+    var dogs:[Perro] = [Perro]()
+    
+    //ActionButton
     @IBAction func callbuttonpressed(_ sender: UIButton) {
         print("button_pressed_\(sender.tag)")
         displayalert(userMessage: "Realmente desea eliminar este elemento?", index: sender.tag)
         
     }
     
-    //return_number_cells
+    //returnNumberCells
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (list.count)
     }
     
-    //custom_cell
+    //customCell
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! viewcontrollerTableViewCell
         cell.myImage.image = UIImage(named:(list[indexPath.row] + ".jpg"))
@@ -41,9 +59,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return (cell)
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    /*func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         list.remove(at: indexPath.row)
-    }
+    }*/
+    
     
     
     /*func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool
@@ -51,7 +70,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return true
     }*/
     
-    //swipe_to_delete_item_
+    //swipeToDeleteItem_
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath)
     {
         if editingStyle == .delete
@@ -62,7 +81,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
-    //display_alert_function
+    //displayAlertFunction
     func displayalert(userMessage:String, index:Int) {
         
         let myalert = UIAlertController(title:"Aviso", message:userMessage, preferredStyle: UIAlertControllerStyle.alert)
@@ -88,6 +107,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
+    //addNewIndex
+    func addIndex(name: String) {
+        list.append(name)
+        tableMascota.reloadData()
+    }
 
     
     func displayFieldTextAlert () {
@@ -113,11 +137,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //Present the alert.
         self.present(alert, animated: true, completion: nil)
     }
-    
-    func addIndex(name: String) {
-        list.append(name)
-        tableMascota.reloadData()
-    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
