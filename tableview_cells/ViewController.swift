@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    var list = ["Ernesto","Gabriel","Karla"]
+    //var list = ["Ernesto","Gabriel","Karla"]
     
     //MARK: Outlets&Actions
     @IBOutlet weak var tableMascota: UITableView!
@@ -48,14 +48,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     //MARK: TableViewDelegate
     //returnNumberCells
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (list.count)
+        return (dogs.count)
     }
     
     //customCell
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! viewcontrollerTableViewCell
-        cell.myImage.image = UIImage(named:(list[indexPath.row] + ".jpg"))
-        cell.myLabel.text = list[indexPath.row]
+        cell.myImage.image = dogs[indexPath.row].returnImage()
+        cell.myLabel.text = dogs[indexPath.row].returnName()
         cell.myButton.tag = indexPath.row
         print(indexPath.row)
         cell.myButton.addTarget(self, action: #selector(ViewController.callbuttonpressed(_:)), for: UIControlEvents.touchUpInside)
@@ -65,8 +65,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     /*func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         list.remove(at: indexPath.row)
     }*/
-    
-    
     
     /*func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool
     {
@@ -78,9 +76,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     {
         if editingStyle == .delete
         {
-            list.remove(at: indexPath.row)
+            dogs.remove(at: indexPath.row)
             tableView.reloadData()
-            print(list)
+            print(dogs)
         }
     }
     
@@ -116,12 +114,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //Grab the value from the text field, and print it when the user clicks OK.
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
             let textField = alert?.textFields![0] // Force unwrapping because we know it exists.
-            var textfieldUnwrap = String()
+            var textFieldUnwrapped = String()
             if textField!.text != nil {
-                textfieldUnwrap = textField!.text!
+                textFieldUnwrapped = textField!.text!
             }
-            print("Text field: \(textfieldUnwrap)")
-            self.addIndex(name: textfieldUnwrap)
+            print("Text field: \(textFieldUnwrapped)")
+            self.addIndex(name: textFieldUnwrapped)
         }))
         
         //Present the alert.
@@ -131,14 +129,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     //MARK: ProccesingTableViewCell
     //eliminarRegistroDeLaLista
     func deleteIndex (index : Int) {
-        list.remove(at: index)
+        dogs.remove(at: index)
         tableMascota.reloadData()
     }
     
     //addNewIndex
     func addIndex(name: String) {
-        list.append(name)
+        let dog = Perro (name: name, photo: UIImage(named: "Gabriel.jpg")!)
+        dogs.append(dog)
         tableMascota.reloadData()
+        print(dogs[0].name)
     }
 
 
