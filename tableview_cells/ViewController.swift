@@ -27,7 +27,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     //MARK: Objects
     class Perro {
-        var list:[Perro] = [Perro]()
         var name: String
         var photo: UIImage
         init (name: String, photo: UIImage) {
@@ -131,8 +130,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 print("Text field: \(textFieldUnwrapped)")
                 self.addIndex(name: textFieldUnwrapped)
             } else if textField!.text! == "" {
-                self.displaySimpleAlert(userMessage: "Aun no ha ingresado el nombre")
-                self.displayAlertAgain()
+                self.displaySimpleAlert(userMessage: "Aun no ha ingresado el nombre, por favor intente otra vez")
             }
         }))
         
@@ -154,10 +152,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableMascota.reloadData()
         print(dogs[0].name)
     }
-    
-    func displayAlertAgain() {
-        displayFieldTextAlert()
-    }
+
 
 
     
