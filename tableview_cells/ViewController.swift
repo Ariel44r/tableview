@@ -83,6 +83,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     //MARK: Alerts
+    //displaySimpleAlert
+    func displaySimpleAlert(userMessage:String) {
+        
+        let myalert = UIAlertController(title:"Aviso", message:userMessage, preferredStyle: UIAlertControllerStyle.alert)
+        
+        let okAction = UIAlertAction(title:"ok", style: UIAlertActionStyle.default, handler:nil)
+        myalert.addAction(okAction)
+        
+        self.present(myalert, animated:true, completion:nil)
+    }
     //displayAlertFunctionBeforeDelete
     func displayalert(userMessage:String, index:Int) {
         
@@ -115,11 +125,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
             let textField = alert?.textFields![0] // Force unwrapping because we know it exists.
             var textFieldUnwrapped = String()
-            if textField!.text != nil {
+            //checkIfTextFieldIsEmpty
+            if textField!.text != nil && textField!.text! != "" {
                 textFieldUnwrapped = textField!.text!
+                print("Text field: \(textFieldUnwrapped)")
+                self.addIndex(name: textFieldUnwrapped)
+            } else if textField!.text! == "" {
+                self.displaySimpleAlert(userMessage: "Aun no ha ingresado el nombre")
+                self.displayAlertAgain()
             }
-            print("Text field: \(textFieldUnwrapped)")
-            self.addIndex(name: textFieldUnwrapped)
         }))
         
         //Present the alert.
@@ -139,6 +153,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         dogs.append(dog)
         tableMascota.reloadData()
         print(dogs[0].name)
+    }
+    
+    func displayAlertAgain() {
+        displayFieldTextAlert()
     }
 
 
