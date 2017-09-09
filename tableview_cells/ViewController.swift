@@ -11,13 +11,21 @@ import UIKit
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     var list = ["Ernesto","Gabriel","Karla"]
-
+    
+    //MARK: Outlets&Actions
     @IBOutlet weak var tableMascota: UITableView!
     
     @IBAction func buttonAddDog(_ sender: Any) {
        displayFieldTextAlert()
     }
     
+    //ActionButton
+    @IBAction func callbuttonpressed(_ sender: UIButton) {
+        print("button_pressed_\(sender.tag)")
+        displayalert(userMessage: "Realmente desea eliminar este elemento?", index: sender.tag)
+    }
+    
+    //MARK: Objects
     class Perro {
         var list:[Perro] = [Perro]()
         var name: String
@@ -34,15 +42,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
+    //MARK: GlobalInstance
     var dogs:[Perro] = [Perro]()
     
-    //ActionButton
-    @IBAction func callbuttonpressed(_ sender: UIButton) {
-        print("button_pressed_\(sender.tag)")
-        displayalert(userMessage: "Realmente desea eliminar este elemento?", index: sender.tag)
-        
-    }
-    
+    //MARK: TableViewDelegate
     //returnNumberCells
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (list.count)
@@ -81,7 +84,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
-    //displayAlertFunction
+    //MARK: Alerts
+    //displayAlertFunctionBeforeDelete
     func displayalert(userMessage:String, index:Int) {
         
         let myalert = UIAlertController(title:"Aviso", message:userMessage, preferredStyle: UIAlertControllerStyle.alert)
@@ -98,22 +102,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         self.present(myalert, animated:true, completion:nil)
     }
-
-    //eliminarRegistroDeLaLista
-    func deleteIndex (index : Int) {
-        
-        list.remove(at: index)
-        tableMascota.reloadData()
-        
-    }
     
-    //addNewIndex
-    func addIndex(name: String) {
-        list.append(name)
-        tableMascota.reloadData()
-    }
-
-    
+    //DisplayAlertFieldTextInput
     func displayFieldTextAlert () {
         //Create the alert controller.
         let alert = UIAlertController(title: "Ingresa el nombre del Perro", message: "Enter a text", preferredStyle: .alert)
@@ -138,6 +128,26 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.present(alert, animated: true, completion: nil)
     }
 
+    //MARK: ProccesingTableViewCell
+    //eliminarRegistroDeLaLista
+    func deleteIndex (index : Int) {
+        list.remove(at: index)
+        tableMascota.reloadData()
+    }
+    
+    //addNewIndex
+    func addIndex(name: String) {
+        list.append(name)
+        tableMascota.reloadData()
+    }
+
+
+    
+    
+    
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
