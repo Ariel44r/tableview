@@ -113,7 +113,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     //DisplayAlertFieldTextInput
     func displayFieldTextAlert () {
         //Create the alert controller.
-        let alert = UIAlertController(title: "Ingresa el nombre del Perro", message: "Enter a text", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Ingresa el nombre del Perro", message: "", preferredStyle: .alert)
         
         //Add the text field. You can configure it however you need.
         alert.addTextField { (textField) in
