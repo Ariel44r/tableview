@@ -30,7 +30,7 @@
                                         <rect key="frame" x="0.0" y="28" width="343" height="169"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ojW-nD-pxr" id="3e0-3f-H9K">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="168.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="169"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="a3J-mA-lWe">
@@ -48,12 +48,16 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EB2-0P-OaJ">
-                                                    <rect key="frame" x="201" y="87" width="39" height="42"/>
+                                                    <rect key="frame" x="302" y="105" width="33" height="33"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" backgroundImage="trash.jpg"/>
                                                     <connections>
                                                         <action selector="callbuttonpressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="A5S-Ng-HLX"/>
                                                     </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LQW-At-CnT">
+                                                    <rect key="frame" x="132" y="112" width="22" height="22"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -65,6 +69,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="buttonAddImage" destination="LQW-At-CnT" id="7at-HW-spj"/>
                                             <outlet property="myButton" destination="EB2-0P-OaJ" id="5Oj-QJ-NXa"/>
                                             <outlet property="myImage" destination="a3J-mA-lWe" id="JlQ-gs-G0o"/>
                                             <outlet property="myLabel" destination="Thy-Ne-ekr" id="yhb-dJ-LPI"/>
@@ -80,7 +85,7 @@
                                 <rect key="frame" x="337" y="35" width="22" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <action selector="buttonAddDog:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ASG-ns-7L6"/>
+                                    <action selector="addDog:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oqt-uw-9Gu"/>
                                 </connections>
                             </button>
                         </subviews>

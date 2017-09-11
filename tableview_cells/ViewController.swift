@@ -8,22 +8,48 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
-    //var list = ["Ernesto","Gabriel","Karla"]
-    
+    //MARK: variables
+    var currentIndexPhoto:Int = 0
     //MARK: Outlets&Actions
     @IBOutlet weak var tableMascota: UITableView!
     
-    @IBAction func buttonAddDog(_ sender: Any) {
-       displayFieldTextAlert()
-    }
-    
-    //ActionButton
+    //ActionButtonDelete
     @IBAction func callbuttonpressed(_ sender: UIButton) {
         print("button_pressed_\(sender.tag)")
         displayalert(userMessage: "Realmente desea eliminar este elemento?", index: sender.tag)
     }
+    
+    @IBAction func addDog(_ sender: Any) {
+        displayFieldTextAlert()
+    }
+    
+    //actionButtonAddImage
+    @IBAction func buttonAddImage(_ sender: Any) {
+        print("button Add Image Pressed")
+        let image = UIImagePickerController()
+        image.delegate = self as UIImagePickerControllerDelegate & UINavigationControllerDelegate
+        image.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        image.allowsEditing = false
+        currentIndexPhoto = (sender as! UIButton).tag
+        self.present(image, animated: true) {
+            //despues de completar proceso
+        }
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            dogs[currentIndexPhoto].photo = image
+            tableMascota.reloadData()
+        } else {
+            //errorMessage
+        }
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    
     
     //MARK: Objects
     class Perro {
@@ -57,7 +83,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         cell.myLabel.text = dogs[indexPath.row].returnName()
         cell.myButton.tag = indexPath.row
         print(indexPath.row)
+        cell.buttonAddImage.tag = indexPath.row
         cell.myButton.addTarget(self, action: #selector(ViewController.callbuttonpressed(_:)), for: UIControlEvents.touchUpInside)
+        cell.buttonAddImage.addTarget(self, action: #selector(ViewController.buttonAddImage(_:)), for: UIControlEvents.touchUpInside)
         return (cell)
     }
     
@@ -173,4 +201,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
 
 }
+
+
 
