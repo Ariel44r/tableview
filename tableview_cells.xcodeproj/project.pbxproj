@@ -112,10 +112,7 @@
 				4F35467E1F5F591100F250A4 /* viewcontrollerTableViewCell.swift */,
 				4F3625A41F5E86860087C339 /* Main.storyboard */,
 				4F3625A71F5E86860087C339 /* Assets.xcassets */,
-				4F3546BC1F5F63C800F250A4 /* Ernesto.jpg */,
-				4F3546BD1F5F63C800F250A4 /* Gabriel.jpg */,
-				4F4D1F001F60A7A2004EE472 /* trash.jpg */,
-				4F3546BE1F5F63C800F250A4 /* Karla.jpg */,
+				4F9C49F31F67615900066A2A /* New Group */,
 				4F3625A91F5E86860087C339 /* LaunchScreen.storyboard */,
 				4F3625AC1F5E86860087C339 /* Info.plist */,
 			);
@@ -138,6 +135,17 @@
 				4F3625C21F5E86860087C339 /* Info.plist */,
 			);
 			path = tableview_cellsUITests;
+			sourceTree = "<group>";
+		};
+		4F9C49F31F67615900066A2A /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				4F3546BC1F5F63C800F250A4 /* Ernesto.jpg */,
+				4F3546BD1F5F63C800F250A4 /* Gabriel.jpg */,
+				4F4D1F001F60A7A2004EE472 /* trash.jpg */,
+				4F3546BE1F5F63C800F250A4 /* Karla.jpg */,
+			);
+			name = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

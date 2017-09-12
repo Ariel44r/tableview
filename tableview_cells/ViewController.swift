@@ -12,6 +12,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     //MARK: variables
     var currentIndexPhoto:Int = 0
+    
     //MARK: Outlets&Actions
     @IBOutlet weak var tableMascota: UITableView!
     
@@ -22,6 +23,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @IBAction func addDog(_ sender: Any) {
+        print("Button add new dog are pressed")
         displayFieldTextAlert()
     }
     
@@ -38,6 +40,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
+    //get Image and assign to Perro's photo attribute
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             dogs[currentIndexPhoto].photo = image
@@ -47,8 +50,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         self.dismiss(animated: true, completion: nil)
     }
-    
-    
     
     
     //MARK: Objects
@@ -69,45 +70,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     //MARK: GlobalInstance
     var dogs:[Perro] = [Perro]()
-    
-    //MARK: TableViewDelegate
-    //returnNumberCells
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (dogs.count)
-    }
-    
-    //customCell
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! viewcontrollerTableViewCell
-        cell.myImage.image = dogs[indexPath.row].returnImage()
-        cell.myLabel.text = dogs[indexPath.row].returnName()
-        cell.myButton.tag = indexPath.row
-        print(indexPath.row)
-        cell.buttonAddImage.tag = indexPath.row
-        cell.myButton.addTarget(self, action: #selector(ViewController.callbuttonpressed(_:)), for: UIControlEvents.touchUpInside)
-        cell.buttonAddImage.addTarget(self, action: #selector(ViewController.buttonAddImage(_:)), for: UIControlEvents.touchUpInside)
-        return (cell)
-    }
-    
-    /*func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        list.remove(at: indexPath.row)
-    }*/
-    
-    /*func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool
-    {
-        return true
-    }*/
-    
-    //swipeToDeleteItem_
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath)
-    {
-        if editingStyle == .delete
-        {
-            dogs.remove(at: indexPath.row)
-            tableView.reloadData()
-            print(dogs)
-        }
-    }
     
     //MARK: Alerts
     //displaySimpleAlert
@@ -184,12 +146,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
 
     
-    
-    
-    
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -204,3 +160,44 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
 
 
+extension ViewController {
+    
+    //MARK: TableViewDelegate
+    //returnNumberCells
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return (dogs.count)
+    }
+    
+    //customCell
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! viewcontrollerTableViewCell
+        cell.myImage.image = dogs[indexPath.row].returnImage()
+        cell.myLabel.text = dogs[indexPath.row].returnName()
+        cell.myButton.tag = indexPath.row
+        print(indexPath.row)
+        cell.buttonAddImage.tag = indexPath.row
+        cell.myButton.addTarget(self, action: #selector(ViewController.callbuttonpressed(_:)), for: UIControlEvents.touchUpInside)
+        cell.buttonAddImage.addTarget(self, action: #selector(ViewController.buttonAddImage(_:)), for: UIControlEvents.touchUpInside)
+        return (cell)
+    }
+    
+    /*func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+     list.remove(at: indexPath.row)
+     }*/
+    
+    /*func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool
+     {
+     return true
+     }*/
+    
+    //swipeToDeleteItem_
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath)
+    {
+        if editingStyle == .delete
+        {
+            dogs.remove(at: indexPath.row)
+            tableView.reloadData()
+            print(dogs)
+        }
+    }
+}
