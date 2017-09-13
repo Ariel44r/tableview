@@ -33,13 +33,25 @@
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="169"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="a3J-mA-lWe">
+                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="lEE-lF-JfA">
                                                     <rect key="frame" x="8" y="20" width="104" height="128"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a3J-mA-lWe">
+                                                            <rect key="frame" x="0.0" y="0.0" width="104" height="128"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="104" id="Bpk-q7-ZA8"/>
+                                                                <constraint firstAttribute="height" constant="128" id="eQk-vL-vNb"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                    </subviews>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="104" id="dCd-df-o6u"/>
-                                                        <constraint firstAttribute="height" constant="128" id="yN5-y7-a84"/>
+                                                        <constraint firstAttribute="bottom" secondItem="a3J-mA-lWe" secondAttribute="bottom" id="3eQ-8H-CbW"/>
+                                                        <constraint firstItem="a3J-mA-lWe" firstAttribute="centerY" secondItem="lEE-lF-JfA" secondAttribute="centerY" id="6nl-AR-cQN"/>
+                                                        <constraint firstItem="a3J-mA-lWe" firstAttribute="top" secondItem="lEE-lF-JfA" secondAttribute="top" id="C2g-kA-yZ0"/>
+                                                        <constraint firstItem="a3J-mA-lWe" firstAttribute="leading" secondItem="lEE-lF-JfA" secondAttribute="leading" id="Ccu-Fd-IJz"/>
+                                                        <constraint firstItem="a3J-mA-lWe" firstAttribute="centerX" secondItem="lEE-lF-JfA" secondAttribute="centerX" id="jpQ-La-sEj"/>
                                                     </constraints>
-                                                </imageView>
+                                                </stackView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Thy-Ne-ekr">
                                                     <rect key="frame" x="167" y="44" width="111" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -56,17 +68,10 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LQW-At-CnT">
-                                                    <rect key="frame" x="132" y="112" width="22" height="22"/>
+                                                    <rect key="frame" x="120" y="110" width="22" height="22"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </button>
                                             </subviews>
-                                            <constraints>
-                                                <constraint firstItem="a3J-mA-lWe" firstAttribute="top" secondItem="3e0-3f-H9K" secondAttribute="topMargin" constant="12" id="Hxw-Ji-tKh"/>
-                                                <constraint firstItem="a3J-mA-lWe" firstAttribute="leading" secondItem="3e0-3f-H9K" secondAttribute="leadingMargin" id="LO0-11-Tfn"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="a3J-mA-lWe" secondAttribute="bottom" constant="12.5" id="ert-RU-jmO"/>
-                                                <constraint firstItem="a3J-mA-lWe" firstAttribute="centerY" secondItem="3e0-3f-H9K" secondAttribute="centerY" id="hsa-7V-pUI"/>
-                                                <constraint firstItem="a3J-mA-lWe" firstAttribute="centerX" secondItem="3e0-3f-H9K" secondAttribute="centerX" constant="-111.5" id="lJW-C6-dTp"/>
-                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="buttonAddImage" destination="LQW-At-CnT" id="7at-HW-spj"/>

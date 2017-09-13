@@ -8,11 +8,18 @@
 
 
 import UIKit
+import Foundation
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
     //MARK: variables
     var currentIndexPhoto:Int = 0
+    let userDefaults = UserDefaults.standard
+    var encodedArrayName: [NSData] = [NSData]()
+    var encodedArrayPhoto: [NSData] = [NSData]()
+    
+    //MARK: GlobalInstance
+    var dogs:[Perro] = [Perro]()
     
     //MARK: Outlets&Actions
     @IBOutlet weak var tableMascota: UITableView!
@@ -39,6 +46,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.present(image, animated: true) {
             //despues de completar proceso
         }
+        
     }
     
     //get Image and assign to Perro's photo attribute
@@ -50,27 +58,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             //errorMessage
         }
         self.dismiss(animated: true, completion: nil)
+        let encodedPhoto = NSKeyedArchiver.archivedData(withRootObject: dogs[currentIndexPhoto].photo)
+        let encodedArrayPhoto: [NSData] = [encodedPhoto as NSData]
+        //encodedArrayPhoto.append(UIImagePNGRepresentation(dogs[currentIndexPhoto].photo)! as NSData)
+        userDefaults.set(encodedArrayPhoto, forKey: "dogPhoto")
+        print("Saved Photo")
     }
     
     
-    //MARK: Objects
-    class Perro {
-        var name: String
-        var photo: UIImage
-        init (name: String, photo: UIImage) {
-            self.name = name
-            self.photo = photo
-        }
-        func returnImage () -> UIImage {
-            return self.photo
-        }
-        func returnName () -> String {
-            return self.name
-        }
-    }
     
-    //MARK: GlobalInstance
-    var dogs:[Perro] = [Perro]()
     
     //MARK: Alerts
     //displaySimpleAlert
@@ -141,7 +137,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let dog = Perro (name: name, photo: UIImage(named: "Gabriel.jpg")!)
         dogs.append(dog)
         tableMascota.reloadData()
-        print(dogs[0].name)
+        
+        //userDefaultsAddIndex
+        let encodedName = NSKeyedArchiver.archivedData(withRootObject: dog.name)
+        encodedArrayName.append(encodedName as NSData)
+        userDefaults.set(encodedArrayName, forKey: "dogName")
+        print("Saved Name: \(dog.name)")
     }
 
 
@@ -150,6 +151,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        let dogDataNameEncoded: [NSData] = userDefaults.object(forKey: "dogName") as![NSData]
+        let unpackedName: String = NSKeyedUnarchiver.unarchiveObject(with: ((dogDataNameEncoded[0]) as NSData) as Data) as! String
+        print("The store data is: \(unpackedName)")
+        let dogDataPhotoEncoded: [NSData] = userDefaults.object(forKey: "dogPhoto") as![NSData]
+        let unpackedPhoto: UIImage = NSKeyedUnarchiver.unarchiveObject(with: ((dogDataPhotoEncoded[0]) as NSData) as Data) as! UIImage
+        let temporal = Perro (name: unpackedName, photo: unpackedPhoto)
+        print(temporal.name)
+        dogs.append(temporal)
+        tableMascota.reloadData()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -171,6 +182,7 @@ extension ViewController {
     
     //customCell
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! viewcontrollerTableViewCell
         cell.myImage.image = dogs[indexPath.row].returnImage()
         cell.myLabel.text = dogs[indexPath.row].returnName()
@@ -180,16 +192,8 @@ extension ViewController {
         cell.myButton.addTarget(self, action: #selector(ViewController.callbuttonpressed(_:)), for: UIControlEvents.touchUpInside)
         cell.buttonAddImage.addTarget(self, action: #selector(ViewController.buttonAddImage(_:)), for: UIControlEvents.touchUpInside)
         return (cell)
+        
     }
-    
-    /*func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-     list.remove(at: indexPath.row)
-     }*/
-    
-    /*func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool
-     {
-     return true
-     }*/
     
     //swipeToDeleteItem_
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath)

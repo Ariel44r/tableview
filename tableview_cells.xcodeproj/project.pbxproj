@@ -19,6 +19,7 @@
 		4F3625B61F5E86860087C339 /* tableview_cellsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3625B51F5E86860087C339 /* tableview_cellsTests.swift */; };
 		4F3625C11F5E86860087C339 /* tableview_cellsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3625C01F5E86860087C339 /* tableview_cellsUITests.swift */; };
 		4F4D1F011F60A7A2004EE472 /* trash.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4F4D1F001F60A7A2004EE472 /* trash.jpg */; };
+		4FD0C8231F68AF620094EF47 /* Perro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD0C8221F68AF620094EF47 /* Perro.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		4F3625C01F5E86860087C339 /* tableview_cellsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tableview_cellsUITests.swift; sourceTree = "<group>"; };
 		4F3625C21F5E86860087C339 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4F4D1F001F60A7A2004EE472 /* trash.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = trash.jpg; path = ../../../Downloads/trash.jpg; sourceTree = "<group>"; };
+		4FD0C8221F68AF620094EF47 /* Perro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Perro.swift; path = ../Perro.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,12 +109,13 @@
 		4F36259F1F5E86860087C339 /* tableview_cells */ = {
 			isa = PBXGroup;
 			children = (
+				4FD0C8241F68AFAD0094EF47 /* Classes */,
 				4F3625A01F5E86860087C339 /* AppDelegate.swift */,
 				4F3625A21F5E86860087C339 /* ViewController.swift */,
-				4F35467E1F5F591100F250A4 /* viewcontrollerTableViewCell.swift */,
+				4FD0C8251F68AFE50094EF47 /* Controllers */,
 				4F3625A41F5E86860087C339 /* Main.storyboard */,
 				4F3625A71F5E86860087C339 /* Assets.xcassets */,
-				4F9C49F31F67615900066A2A /* New Group */,
+				4F9C49F31F67615900066A2A /* Images */,
 				4F3625A91F5E86860087C339 /* LaunchScreen.storyboard */,
 				4F3625AC1F5E86860087C339 /* Info.plist */,
 			);
@@ -137,7 +140,7 @@
 			path = tableview_cellsUITests;
 			sourceTree = "<group>";
 		};
-		4F9C49F31F67615900066A2A /* New Group */ = {
+		4F9C49F31F67615900066A2A /* Images */ = {
 			isa = PBXGroup;
 			children = (
 				4F3546BC1F5F63C800F250A4 /* Ernesto.jpg */,
@@ -145,7 +148,23 @@
 				4F4D1F001F60A7A2004EE472 /* trash.jpg */,
 				4F3546BE1F5F63C800F250A4 /* Karla.jpg */,
 			);
-			name = "New Group";
+			name = Images;
+			sourceTree = "<group>";
+		};
+		4FD0C8241F68AFAD0094EF47 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				4FD0C8221F68AF620094EF47 /* Perro.swift */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		4FD0C8251F68AFE50094EF47 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4F35467E1F5F591100F250A4 /* viewcontrollerTableViewCell.swift */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -288,6 +307,7 @@
 			files = (
 				4F3625A31F5E86860087C339 /* ViewController.swift in Sources */,
 				4F35467F1F5F591100F250A4 /* viewcontrollerTableViewCell.swift in Sources */,
+				4FD0C8231F68AF620094EF47 /* Perro.swift in Sources */,
 				4F3625A11F5E86860087C339 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
