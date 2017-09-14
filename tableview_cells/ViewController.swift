@@ -59,7 +59,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         self.dismiss(animated: true, completion: nil)
         let encodedPhoto = NSKeyedArchiver.archivedData(withRootObject: dogs[currentIndexPhoto].photo)
-        let encodedArrayPhoto: [NSData] = [encodedPhoto as NSData]
+        encodedArrayPhoto.append(encodedPhoto as NSData)
         //encodedArrayPhoto.append(UIImagePNGRepresentation(dogs[currentIndexPhoto].photo)! as NSData)
         userDefaults.set(encodedArrayPhoto, forKey: "dogPhoto")
         print("Saved Photo")
@@ -79,6 +79,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         self.present(myalert, animated:true, completion:nil)
     }
+    
     //displayAlertFunctionBeforeDelete
     func displayalert(userMessage:String, index:Int) {
         
