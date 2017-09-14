@@ -152,8 +152,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         let dogDataNameEncoded: [NSData] = userDefaults.object(forKey: "dogName") as![NSData]
-        
-        let dogDataPhotoEncoded: [NSData] = userDefaults.object(forKey: "dogPhoto") as![NSData]
+        encodedArrayName = dogDataNameEncoded
+        var dogDataPhotoEncoded: [NSData] = userDefaults.object(forKey: "dogPhoto") as![NSData]
+        encodedArrayPhoto = dogDataPhotoEncoded
         if dogDataNameEncoded.isEmpty {
             print("The array is empty")
         } else {
@@ -161,15 +162,26 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 let unpackedName: String = NSKeyedUnarchiver.unarchiveObject(with: ((dogDataNameEncoded[index]) as NSData) as Data) as! String
                 print("The store data is: \(unpackedName)")
                 
-                let unpackedPhoto: UIImage = NSKeyedUnarchiver.unarchiveObject(with: ((dogDataPhotoEncoded[index]) as NSData) as Data) as! UIImage
+                if let data:Data = (dogDataPhotoEncoded[index] as? NSData) as? Data{
+                    if let unpackedPhoto: UIImage = NSKeyedUnarchiver.unarchiveObject(with: data) as? UIImage{
+                        let temporal = Perro (name: unpackedName, photo: unpackedPhoto)
+                        dogs.append(temporal)
+                    }
+                }
                 
-                let temporal = Perro (name: unpackedName, photo: unpackedPhoto)
-                dogs.append(temporal)
+                /*if let unpackedPhoto: UIImage? = NSKeyedUnarchiver.unarchiveObject(with: (){
+                    let temporal = Perro (name: unpackedName, photo: unpackedPhoto!)
+                    dogs.append(temporal)
+                }*/
+                
+                
+                
             }
         }
         
         
         tableMascota.reloadData()
+        dogDataPhotoEncoded.removeAll()
     }
 
     override func didReceiveMemoryWarning() {
