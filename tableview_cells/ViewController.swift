@@ -145,23 +145,31 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         userDefaults.set(encodedArrayName, forKey: "dogName")
         print("Saved Name: \(dog.name)")
     }
-
-
-
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         let dogDataNameEncoded: [NSData] = userDefaults.object(forKey: "dogName") as![NSData]
-        let unpackedName: String = NSKeyedUnarchiver.unarchiveObject(with: ((dogDataNameEncoded[0]) as NSData) as Data) as! String
-        print("The store data is: \(unpackedName)")
-        let dogDataPhotoEncoded: [NSData] = userDefaults.object(forKey: "dogPhoto") as![NSData]
-        let unpackedPhoto: UIImage = NSKeyedUnarchiver.unarchiveObject(with: ((dogDataPhotoEncoded[0]) as NSData) as Data) as! UIImage
-        let temporal = Perro (name: unpackedName, photo: unpackedPhoto)
-        print(temporal.name)
-        dogs.append(temporal)
-        tableMascota.reloadData()
         
+        let dogDataPhotoEncoded: [NSData] = userDefaults.object(forKey: "dogPhoto") as![NSData]
+        if dogDataNameEncoded.isEmpty {
+            print("The array is empty")
+        } else {
+            for index in 0 ..< dogDataNameEncoded.count {
+                let unpackedName: String = NSKeyedUnarchiver.unarchiveObject(with: ((dogDataNameEncoded[index]) as NSData) as Data) as! String
+                print("The store data is: \(unpackedName)")
+                
+                let unpackedPhoto: UIImage = NSKeyedUnarchiver.unarchiveObject(with: ((dogDataPhotoEncoded[index]) as NSData) as Data) as! UIImage
+                
+                let temporal = Perro (name: unpackedName, photo: unpackedPhoto)
+                dogs.append(temporal)
+            }
+        }
+        
+        
+        tableMascota.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
