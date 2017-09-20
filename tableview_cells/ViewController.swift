@@ -15,8 +15,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     //MARK: variables
     var currentIndexPhoto:Int = 0
     let userDefaults = UserDefaults.standard
-    var encodedArrayName: [NSData] = [NSData]()
-    var encodedArrayPhoto: [NSData] = [NSData]()
+    var encodedArrayName: [Data] = [Data]()
+    var encodedArrayPhoto: [Data] = [Data]()
     
     //MARK: GlobalInstance
     var dogs:[Perro] = [Perro]()
@@ -59,7 +59,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         self.dismiss(animated: true, completion: nil)
         let encodedPhoto = NSKeyedArchiver.archivedData(withRootObject: dogs[currentIndexPhoto].photo)
-        encodedArrayPhoto.append(encodedPhoto as NSData)
+        encodedArrayPhoto.append(encodedPhoto as Data)
         //encodedArrayPhoto.append(UIImagePNGRepresentation(dogs[currentIndexPhoto].photo)! as NSData)
         userDefaults.set(encodedArrayPhoto, forKey: "dogPhoto")
         print("Saved Photo")
@@ -141,48 +141,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         //userDefaultsAddIndex
         let encodedName = NSKeyedArchiver.archivedData(withRootObject: dog.name)
-        encodedArrayName.append(encodedName as NSData)
+        encodedArrayName.append(encodedName as Data)
         userDefaults.set(encodedArrayName, forKey: "dogName")
         print("Saved Name: \(dog.name)")
     }
     
     
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        let dogDataNameEncoded: [NSData] = userDefaults.object(forKey: "dogName") as![NSData]
-        encodedArrayName = dogDataNameEncoded
-        var dogDataPhotoEncoded: [NSData] = userDefaults.object(forKey: "dogPhoto") as![NSData]
-        encodedArrayPhoto = dogDataPhotoEncoded
-        if dogDataNameEncoded.isEmpty {
-            print("The array is empty")
-        } else {
-            for index in 0 ..< dogDataNameEncoded.count {
-                let unpackedName: String = NSKeyedUnarchiver.unarchiveObject(with: ((dogDataNameEncoded[index]) as NSData) as Data) as! String
-                print("The store data is: \(unpackedName)")
-                
-                if let data:Data = (dogDataPhotoEncoded[index] as? NSData) as? Data{
-                    if let unpackedPhoto: UIImage = NSKeyedUnarchiver.unarchiveObject(with: data) as? UIImage{
-                        let temporal = Perro (name: unpackedName, photo: unpackedPhoto)
-                        dogs.append(temporal)
-                    }
-                }
-                
-                /*if let unpackedPhoto: UIImage? = NSKeyedUnarchiver.unarchiveObject(with: (){
-                    let temporal = Perro (name: unpackedName, photo: unpackedPhoto!)
-                    dogs.append(temporal)
-                }*/
-                
-                
-                
-            }
-        }
-        
-        
-        tableMascota.reloadData()
-        dogDataPhotoEncoded.removeAll()
-    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -224,6 +189,45 @@ extension ViewController {
             dogs.remove(at: indexPath.row)
             tableView.reloadData()
             print(dogs)
+        }
+    }
+}
+
+extension ViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Do any additional setup after loading the view, typically from a nib.
+        var dogDataNameEncoded: [Data] = [Data]()
+        var dogDataPhotoEncoded: [Data] = [Data]()
+        
+        if userDefaults.object(forKey: "dogName") != nil {
+            dogDataNameEncoded = userDefaults.object(forKey: "dogName") as![Data]
+            encodedArrayName = dogDataNameEncoded
+            
+            if userDefaults.object(forKey: "dogPhoto") != nil {
+                dogDataPhotoEncoded = userDefaults.object(forKey: "dogPhoto") as![Data]
+                encodedArrayPhoto = dogDataPhotoEncoded
+                if dogDataNameEncoded.isEmpty || dogDataPhotoEncoded.isEmpty {
+                    print("The array is empty")
+                } else {
+                    for index in 0 ..< dogDataNameEncoded.count {
+                        let unpackedName: String = NSKeyedUnarchiver.unarchiveObject(with: (dogDataNameEncoded[index]) as Data) as! String
+                        print("The store data is: \(unpackedName)")
+                        
+                        if let data:Data = (dogDataPhotoEncoded[index]) as? Data{
+                            if let unpackedPhoto: UIImage = NSKeyedUnarchiver.unarchiveObject(with: data) as? UIImage{
+                                let temporal = Perro (name: unpackedName, photo: unpackedPhoto)
+                                dogs.append(temporal)
+                            }
+                        }
+                    }
+                    tableMascota.reloadData()
+                    print("thenumber of Names is: \(dogDataNameEncoded.count)")
+                    print("The number of photos is : \(dogDataPhotoEncoded.count)")
+                }
+            }
         }
     }
 }
