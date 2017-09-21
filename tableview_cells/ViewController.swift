@@ -63,9 +63,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //encodedArrayPhoto.append(UIImagePNGRepresentation(dogs[currentIndexPhoto].photo)! as NSData)
         userDefaults.set(encodedArrayPhoto, forKey: "dogPhoto")
         print("Saved Photo")
+        
+        let fManager = FileManager()
+        let pngImage = UIImagePNGRepresentation(dogs[currentIndexPhoto].photo)
+        if !fManager.fileExists(atPath: getPath() + "images") {
+            do {
+                try fManager.createDirectory(atPath: getPath() + "/images", withIntermediateDirectories: false, attributes: nil)
+            } catch (let exception){
+                print (exception)
+            }
+            
+        }
+        fManager.createFile(atPath: getPath() + "/images/image.png", contents: pngImage, attributes: nil)
+        
+        /*if createFile(atPath: getPath(), contents: dogs[currentIndexPhoto].photo) {
+            print("the new file are created at \(getPath())")
+        }*/
     }
-    
-    
     
     
     //MARK: Alerts
@@ -146,6 +160,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         print("Saved Name: \(dog.name)")
     }
     
+    //MARK: fileManager
+    func getPath() -> String {
+        let dirPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        let docsDir = dirPath[0]
+        return docsDir
+    }
+    
+    /*func createFile(atPath path: String, contents data: UIImage?, attributes attr: [String : Any]? = nil) -> Bool {
+        print ("filecreatesuccess")
+        return true
+    }*/
+    
+    /*func UIImagePNGRepresentation(_ image: UIImage) -> Data? {
+        let pngImage: Data = image as! Data
+        return pngImage
+    }*/
     
     
 
@@ -199,6 +229,7 @@ extension ViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view, typically from a nib.
+        
         var dogDataNameEncoded: [Data] = [Data]()
         var dogDataPhotoEncoded: [Data] = [Data]()
         
@@ -224,8 +255,8 @@ extension ViewController {
                         }
                     }
                     tableMascota.reloadData()
-                    print("thenumber of Names is: \(dogDataNameEncoded.count)")
-                    print("The number of photos is : \(dogDataPhotoEncoded.count)")
+                    print("The number of Names is: \(dogDataNameEncoded.count)")
+                    print("The number of photos is: \(dogDataPhotoEncoded.count)")
                 }
             }
         }
