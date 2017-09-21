@@ -16,7 +16,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var currentIndexPhoto:Int = 0
     let userDefaults = UserDefaults.standard
     var encodedArrayName: [Data] = [Data]()
-    var encodedArrayPhoto: [Data] = [Data]()
     
     //MARK: GlobalInstance
     var dogs:[Perro] = [Perro]()
@@ -58,11 +57,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             //errorMessage
         }
         self.dismiss(animated: true, completion: nil)
-        let encodedPhoto = NSKeyedArchiver.archivedData(withRootObject: dogs[currentIndexPhoto].photo)
-        encodedArrayPhoto.append(encodedPhoto as Data)
-        //encodedArrayPhoto.append(UIImagePNGRepresentation(dogs[currentIndexPhoto].photo)! as NSData)
-        userDefaults.set(encodedArrayPhoto, forKey: "dogPhoto")
-        print("Saved Photo")
+        
         
         let fManager = FileManager()
         let pngImage = UIImagePNGRepresentation(dogs[currentIndexPhoto].photo)
@@ -74,11 +69,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
             
         }
-        fManager.createFile(atPath: getPath() + "/images/image.png", contents: pngImage, attributes: nil)
-        
-        /*if createFile(atPath: getPath(), contents: dogs[currentIndexPhoto].photo) {
-            print("the new file are created at \(getPath())")
-        }*/
+        let nameString: String = dogs[currentIndexPhoto].name
+        fManager.createFile(atPath: getPath() + "/images/\(nameString).png", contents: pngImage, attributes: nil)
+
     }
     
     
@@ -231,34 +224,29 @@ extension ViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         var dogDataNameEncoded: [Data] = [Data]()
-        var dogDataPhotoEncoded: [Data] = [Data]()
+        
         
         if userDefaults.object(forKey: "dogName") != nil {
             dogDataNameEncoded = userDefaults.object(forKey: "dogName") as![Data]
             encodedArrayName = dogDataNameEncoded
-            
-            if userDefaults.object(forKey: "dogPhoto") != nil {
-                dogDataPhotoEncoded = userDefaults.object(forKey: "dogPhoto") as![Data]
-                encodedArrayPhoto = dogDataPhotoEncoded
-                if dogDataNameEncoded.isEmpty || dogDataPhotoEncoded.isEmpty {
-                    print("The array is empty")
-                } else {
-                    for index in 0 ..< dogDataNameEncoded.count {
-                        let unpackedName: String = NSKeyedUnarchiver.unarchiveObject(with: (dogDataNameEncoded[index]) as Data) as! String
-                        print("The store data is: \(unpackedName)")
-                        
-                        if let data:Data = (dogDataPhotoEncoded[index]) as? Data{
-                            if let unpackedPhoto: UIImage = NSKeyedUnarchiver.unarchiveObject(with: data) as? UIImage{
-                                let temporal = Perro (name: unpackedName, photo: unpackedPhoto)
-                                dogs.append(temporal)
-                            }
-                        }
-                    }
-                    tableMascota.reloadData()
-                    print("The number of Names is: \(dogDataNameEncoded.count)")
-                    print("The number of photos is: \(dogDataPhotoEncoded.count)")
+            if dogDataNameEncoded.isEmpty {
+                print("The array is empty")
+            } else {
+                for index in 0 ..< dogDataNameEncoded.count {
+                    print(dogDataNameEncoded.count)
+                    
+                    let unpackedName: String = NSKeyedUnarchiver.unarchiveObject(with: (dogDataNameEncoded[index]) as Data) as! String
+                    
+                    print("The store data is: \(unpackedName)")
+                    print(dogs.count)
+                    let pathImage = getPath() + "/images/" + unpackedName + ".png"
+                    let currentImage = UIImage(contentsOfFile: pathImage)
+                    let temporal = Perro (name: unpackedName, photo: currentImage!)
+                    dogs.append(temporal)
                 }
             }
+            tableMascota.reloadData()
+            print("The number of Names is: \(dogDataNameEncoded.count)")
         }
     }
 }
